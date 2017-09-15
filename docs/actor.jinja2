@@ -1,0 +1,8 @@
+{% macro underline(string, underline_with) -%}
+{{ string }}
+{% str(underline_with) * int(len(string))%}
+{%- endmacro %}
+
+{{ underline(actor_name, "^") }}
+
+{{ description }}
