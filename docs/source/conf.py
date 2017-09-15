@@ -177,10 +177,16 @@ source_parsers = {
 def setup(app):
     LEAPP_ACTORS_GIT        = "https://github.com/jzigmund/snactor.git"
     LEAPP_ACTORS_GIT_BRANCH = "origin/actors_descriptions"
+    ACTORS_ROOT             = "tmp/examples/actors"
+    DYNAMIC_ROOT            = "source/_dynamic"
 
-    call(["git", "clone", LEAPP_ACTORS_GIT, "tmp"])
-    #call(["cd", "tmp", "&&", "git", "checkout", "-t", LEAPP_ACTORS_GIT_BRANCH])
-    call(["mkdir", "-p", "source/_dynamic"])
+    def shell(cmd):
+        return call(cmd, shell=True)
+    
+    shell("rm -rf tmp {}/*".format(DYNAMIC_ROOT))
+    shell("git clone {} tmp".format(LEAPP_ACTORS_GIT))
+    shell("cd tmp && git checkout -t {}".format(LEAPP_ACTORS_GIT_BRANCH))
+    shell("mkdir -p {}".format(DYNAMIC_ROOT))
 	
 	
-    separate.generate_dynamic("tmp/examples/actors")
+    separate.generate_dynamic(ACTORS_ROOT)

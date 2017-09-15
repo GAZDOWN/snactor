@@ -10,12 +10,6 @@ SPHINXPROJ    = Leapp
 SOURCEDIR     = source
 BUILDDIR      = build
 
-# leapp-actors repository
-#LEAPP_ACTORS_GIT = https://github.com/leapp-to/leapp-actors.git 
-LEAPP_ACTORS_GIT 		= https://github.com/jzigmund/snactor.git
-LEAPP_ACTORS_GIT_BRANCH = origin/actors_descriptions
-ACTORS_ROOT 			= tmp/examples/actors 
-DYNAMIC_ROOT			= $(SOURCEDIR)/_dynamic
 
 # Put it first so that "make" without argument is like "make help".
 help:
@@ -26,11 +20,5 @@ help:
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
-	rm -rf tmp $(DYNAMIC_ROOT)/*
-	#rm -rf $(DYNAMIC_ROOT)/*
-	#mkdir -p $(DYNAMIC_ROOT)
-	#git clone $(LEAPP_ACTORS_GIT) tmp
-	#cd tmp && git checkout -t $(LEAPP_ACTORS_GIT_BRANCH) 
-	#./separate.py $(ACTORS_ROOT)
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
