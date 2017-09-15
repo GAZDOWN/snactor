@@ -20,6 +20,13 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+from subprocess import call
+sys.path.insert(0, os.path.abspath('.'))
+
+import hooks.actors as separate
+
 import sphinx_rtd_theme
 
 
@@ -163,3 +170,17 @@ texinfo_documents = [
 source_parsers = {
    '.md': 'recommonmark.parser.CommonMarkParser',
 }
+
+
+# Event hooks
+
+def setup(app):
+    LEAPP_ACTORS_GIT        = "https://github.com/jzigmund/snactor.git"
+    LEAPP_ACTORS_GIT_BRANCH = "origin/actors_descriptions"
+
+    call(["git", "clone", LEAPP_ACTORS_GIT, "tmp"])
+    call(["cd", "tmp", "&&", "git", "checkout", "-t", LEAPP_ACTORS_GIT_BRANCH])
+    call(["mkdir", "-p", "source/_dynamic"])
+	
+	
+    separate.generate_dynamic("tmp/examples/actors")

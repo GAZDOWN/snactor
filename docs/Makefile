@@ -28,9 +28,9 @@ help:
 %: Makefile
 	rm -rf tmp $(DYNAMIC_ROOT)/*
 	#rm -rf $(DYNAMIC_ROOT)/*
-	mkdir -p $(DYNAMIC_ROOT)
-	git clone $(LEAPP_ACTORS_GIT) tmp
-	cd tmp && git checkout -t $(LEAPP_ACTORS_GIT_BRANCH) 
-	./separate.py $(ACTORS_ROOT)
+	#mkdir -p $(DYNAMIC_ROOT)
+	#git clone $(LEAPP_ACTORS_GIT) tmp
+	#cd tmp && git checkout -t $(LEAPP_ACTORS_GIT_BRANCH) 
+	#./separate.py $(ACTORS_ROOT)
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
