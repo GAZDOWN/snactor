@@ -179,7 +179,7 @@ def setup(app):
     LEAPP_ACTORS_GIT_BRANCH = "origin/actors_descriptions"
 
     call(["git", "clone", LEAPP_ACTORS_GIT, "tmp"])
-    call(["cd", "tmp", "&&", "git", "checkout", "-t", LEAPP_ACTORS_GIT_BRANCH])
+    #call(["cd", "tmp", "&&", "git", "checkout", "-t", LEAPP_ACTORS_GIT_BRANCH])
     call(["mkdir", "-p", "source/_dynamic"])
 	
 	
