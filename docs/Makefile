@@ -26,11 +26,11 @@ help:
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
-	#rm -rf tmp $(DYNAMIC_ROOT)/*
-	rm -rf $(DYNAMIC_ROOT)/*
+	rm -rf tmp $(DYNAMIC_ROOT)/*
+	#rm -rf $(DYNAMIC_ROOT)/*
 	mkdir -p $(DYNAMIC_ROOT)
-	#git clone $(LEAPP_ACTORS_GIT) tmp
-	#cd tmp && git checkout -t $(LEAPP_ACTORS_GIT_BRANCH) 
+	git clone $(LEAPP_ACTORS_GIT) tmp
+	cd tmp && git checkout -t $(LEAPP_ACTORS_GIT_BRANCH) 
 	./separate.py $(ACTORS_ROOT)
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
