@@ -178,7 +178,7 @@ def setup(app):
     LEAPP_ACTORS_GIT        = "https://github.com/jzigmund/snactor.git"
     LEAPP_ACTORS_GIT_BRANCH = "origin/actors_descriptions"
     ACTORS_ROOT             = "tmp/examples/actors"
-    DYNAMIC_ROOT            = "_dynamic"
+    DYNAMIC_ROOT            = "source/_dynamic"
 
     def shell(cmd):
         return call(cmd, shell=True)
