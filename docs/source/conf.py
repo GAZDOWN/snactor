@@ -175,13 +175,21 @@ source_parsers = {
 # Event hooks
 
 def setup(app):
+    # Change the CWD to source (local for config.py) in order to have the
+    # same file structure on readthedocs as well as on any local machine
+    # executing make.
+    cwd = os.getcwd()
+    os.chdir(os.path.dirname(os.path.realpath(__file__)))
+
     LEAPP_ACTORS_GIT        = "https://github.com/jzigmund/snactor.git"
     LEAPP_ACTORS_GIT_BRANCH = "origin/actors_descriptions"
     ACTORS_ROOT             = "tmp/examples/actors"
-    DYNAMIC_ROOT            = "source/_dynamic"
+    DYNAMIC_ROOT            = "_dynamic"
+
 
     def shell(cmd):
         return call(cmd, shell=True)
+    
     
     shell("rm -rf tmp {}/*".format(DYNAMIC_ROOT))
     shell("git clone {} tmp".format(LEAPP_ACTORS_GIT))
@@ -189,4 +197,7 @@ def setup(app):
     shell("mkdir -p {}".format(DYNAMIC_ROOT))
 	
 	
-    separate.generate_dynamic(ACTORS_ROOT)
+    separate.generate_dynamic(ACTORS_ROOT, DYNAMIC_ROOT)
+    shell("rm -rf tmp".format(DYNAMIC_ROOT))
+
+    os.chdir(cwd)

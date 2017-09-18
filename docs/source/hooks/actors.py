@@ -8,7 +8,6 @@ import yaml
 import jinja2
 
 
-DOC_PATH = "source/_dynamic"
 TAG_SEPARATED = {}
 
 
@@ -20,8 +19,8 @@ def generate_underline_for(string, underline_with="="):
     return generate_underline(underline_with, len(string))
 
 
-def render_doc_file(tag):
-    doc_path = os.path.join(DOC_PATH, "{}.rst".format(tag.replace("-", "_").lower()))
+def render_doc_file(tag, path):
+    doc_path = os.path.join(path, "{}.rst".format(tag.replace("-", "_").lower()))
 
     with open(doc_path, "w") as doc_file:
         doc_file.write("{}\n".format(tag.title()))
@@ -86,15 +85,15 @@ def find_actors(path):
                     parse_definition(filename, os.path.join(root, f))
         
 
-def generate_dynamic(path):
-    #path = "tmp/examples/actors"
-    #path = None
-    #try:
-    #    path = sys.argv[1]
-    #except IndexError:
-    #    raise ValueError("Please provide actors root")
+def generate_dynamic(src_path, dst_path):
+    """
+    :param src_path: path to actors root 
+    :type src_path: string
 
-    find_actors(path)
+    :param src_path: path to folder where the generated templates will be stored
+    :type src_path: string
+    """
+    find_actors(src_path)
 
     for tag in TAG_SEPARATED.keys():
-        render_doc_file(tag)
+        render_doc_file(tag, dst_path)
