@@ -181,7 +181,8 @@ def setup(app):
     cwd = os.getcwd()
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
-    LEAPP_ACTORS_GIT        = "https://github.com/jzigmund/snactor.git"
+    #LEAPP_ACTORS_GIT        = "https://github.com/jzigmund/snactor.git"
+    LEAPP_ACTORS_GIT        = "https://github.com/leapp-to/snactor.git"
     LEAPP_ACTORS_GIT_BRANCH = "origin/actors_descriptions"
     ACTORS_ROOT             = "tmp/examples/actors"
     DYNAMIC_ROOT            = "_dynamic"
@@ -193,7 +194,7 @@ def setup(app):
     
     shell("rm -rf tmp {}/*".format(DYNAMIC_ROOT))
     shell("git clone {} tmp".format(LEAPP_ACTORS_GIT))
-    shell("cd tmp && git checkout -t {}".format(LEAPP_ACTORS_GIT_BRANCH))
+    #shell("cd tmp && git checkout -t {}".format(LEAPP_ACTORS_GIT_BRANCH))
     shell("mkdir -p {}".format(DYNAMIC_ROOT))
 	
 	
