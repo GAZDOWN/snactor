@@ -22,13 +22,13 @@
 # sys.path.insert(0, os.path.abspath('.'))
 import os
 import sys
+
 from subprocess import call
+
+
 sys.path.insert(0, os.path.abspath('.'))
-
-import hooks.actors as separate
-
-import sphinx_rtd_theme
-
+import hooks.actors as separate  # noqa
+import sphinx_rtd_theme  # noqa
 
 # -- General configuration ------------------------------------------------
 
@@ -39,8 +39,7 @@ import sphinx_rtd_theme
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc',
-    'sphinx.ext.githubpages']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.githubpages']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -92,7 +91,7 @@ todo_include_todos = False
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-#html_theme = 'alabaster'
+# html_theme = 'alabaster'
 html_theme = 'sphinx_rtd_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
@@ -167,9 +166,7 @@ texinfo_documents = [
 ]
 
 
-source_parsers = {
-   '.md': 'recommonmark.parser.CommonMarkParser',
-}
+source_parsers = {'.md': 'recommonmark.parser.CommonMarkParser'}
 
 
 # Event hooks
@@ -181,23 +178,20 @@ def setup(app):
     cwd = os.getcwd()
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
-    #LEAPP_ACTORS_GIT        = "https://github.com/jzigmund/snactor.git"
-    LEAPP_ACTORS_GIT        = "https://github.com/leapp-to/snactor.git"
-    LEAPP_ACTORS_GIT_BRANCH = "origin/actors_descriptions"
-    ACTORS_ROOT             = "tmp/examples/actors"
-    DYNAMIC_ROOT            = "_dynamic"
-
+    # LEAPP_ACTORS_GIT        = "https://github.com/jzigmund/snactor.git"
+    LEAPP_ACTORS_GIT = "https://github.com/leapp-to/snactor.git"
+    # LEAPP_ACTORS_GIT_BRANCH = "origin/actors_descriptions"
+    ACTORS_ROOT = "tmp/examples/actors"
+    DYNAMIC_ROOT = "_dynamic"
 
     def shell(cmd):
         return call(cmd, shell=True)
-    
-    
+
     shell("rm -rf tmp {}/*".format(DYNAMIC_ROOT))
     shell("git clone {} tmp".format(LEAPP_ACTORS_GIT))
-    #shell("cd tmp && git checkout -t {}".format(LEAPP_ACTORS_GIT_BRANCH))
+    # shell("cd tmp && git checkout -t {}".format(LEAPP_ACTORS_GIT_BRANCH))
     shell("mkdir -p {}".format(DYNAMIC_ROOT))
-	
-	
+
     separate.generate_dynamic(ACTORS_ROOT, DYNAMIC_ROOT)
     shell("rm -rf tmp".format(DYNAMIC_ROOT))
 

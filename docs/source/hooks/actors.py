@@ -1,11 +1,10 @@
 #!/bin/python
 
 import os
-import sys
 
 import yaml
 
-import jinja2
+# import jinja2
 
 
 TAG_SEPARATED = {}
@@ -37,7 +36,7 @@ def render_doc_file(tag, path):
                 description = definition.get("description", None)
                 doc_file.write(description)
                 doc_file.write("\n")
-                
+
                 doc_file.write("**Tags:** ")
                 first = True
                 for t in attributes["tags"]:
@@ -48,14 +47,13 @@ def render_doc_file(tag, path):
 
                     doc_file.write(":doc:`{}`".format(t))
 
-
                 doc_file.write("\n")
                 doc_file.write("\n")
 
 
 def parse_definition(name, definition_path):
     print("parsing {} found in {}".format(name, definition_path))
-    
+
     with open(definition_path, "r") as definition_file:
         definition = yaml.load(definition_file)
         description = definition.get("description", None)
@@ -63,13 +61,13 @@ def parse_definition(name, definition_path):
             print("Actor {} has no description, ignoring...".format(name))
             return
 
-        tags = definition.get("tags", ["untagged"]) 
+        tags = definition.get("tags", ["untagged"])
 
         for tag in tags:
             item = {name: {"path": definition_path, "tags": tags}}
 
             if TAG_SEPARATED.get(tag, None) is None:
-                TAG_SEPARATED[tag] = item 
+                TAG_SEPARATED[tag] = item
             else:
                 TAG_SEPARATED[tag].update(item)
 
@@ -83,11 +81,11 @@ def find_actors(path):
                 filename, ext = os.path.splitext(f)
                 if not filename.startswith('.') and ext.lower() == '.yaml':
                     parse_definition(filename, os.path.join(root, f))
-        
+
 
 def generate_dynamic(src_path, dst_path):
     """
-    :param src_path: path to actors root 
+    :param src_path: path to actors root
     :type src_path: string
 
     :param src_path: path to folder where the generated templates will be stored
