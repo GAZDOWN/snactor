@@ -1,0 +1,18 @@
+inputs:
+- name: host
+  type:
+    name: BaseTypeString
+- name: user
+  type:
+    name: BaseTypeString
+
+#description: |
+
+outputs:
+- name: app_satellite_detection 
+  type:
+    name: AppSatelliteDetectionResult
+
+execute:
+  script-file: satellite_detector_actor.py
+  executable: /usr/bin/python
